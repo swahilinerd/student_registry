@@ -1,26 +1,34 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <router-view v-slot="{Component}">
+        <transition name="slide" mode="out-in">
+            <component :is="Component" :key="$route.path" />
+        </transition>
+  </router-view>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
 export default {
   name: 'App',
-  components: {
-    HelloWorld
+  created() {
+    document.title = "Student Online Application"
   }
 }
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+<style lang="css"> 
+    @import url('https://fonts.googleapis.com/css?family=Roboto+Condensed');
+
+    html, body {
+    font-family: 'Roboto', sans-serif;
+    }
+    .slide-enter-active,
+    .slide-leave-active {
+        transition: opacity 1s, transform 1s; 
+    }
+
+    .slide-enter-from,
+    .slide-leave-to {
+        opacity: 0;
+        transform: translateX(-30%);
+    }
 </style>
